@@ -1,6 +1,12 @@
 
 # ruote testing
 
+getting a test environment (in an rvm world)
+
+    $ cp Gemfile.template Gemfile
+
+    $ bundle install
+
 running all the tests
 
     $ ruby test/test.rb
