@@ -34,12 +34,15 @@ ruote is an open source Ruby workflow engine
     # not yet Parslet 1.5.x ready
 
   s.add_runtime_dependency 'sourcify', '0.5.0'
-  s.add_runtime_dependency 'rufus-json', '>= 1.0.5'
-  s.add_runtime_dependency 'rufus-cloche', '>= 1.0.2'
-  s.add_runtime_dependency 'rufus-dollar', '>= 1.0.4'
-  s.add_runtime_dependency 'rufus-mnemo', '>= 1.2.2'
-  s.add_runtime_dependency 'rufus-scheduler', '>= 3.0.0'
-  s.add_runtime_dependency 'rufus-treechecker', '>= 1.0.8'
+
+  # Try limiting these to their minors to see if we can get
+  # the test world passing
+  s.add_runtime_dependency 'rufus-json', '~> 1.0.5'
+  s.add_runtime_dependency 'rufus-cloche', '~> 1.0.2'
+  s.add_runtime_dependency 'rufus-dollar', '~> 1.0.4'
+  s.add_runtime_dependency 'rufus-mnemo', '~> 1.2.2'
+  s.add_runtime_dependency 'rufus-scheduler', '~> 3.0.0'
+  s.add_runtime_dependency 'rufus-treechecker', '~> 1.0.8'
 
   s.add_development_dependency 'rake'
   s.add_development_dependency 'json'
