@@ -235,7 +235,7 @@ class Ruote::WaitLogger
 
     s << radial_tree(msg) if fei.nil? && msg['action'] == 'launch'
 
-    s
+    "[pid:#{$$}] #{s}"
 
   rescue => e
     "* fancy_print fail\n" +
