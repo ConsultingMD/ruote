@@ -207,7 +207,7 @@ module Ruote
             v = @rule[k]
 
             m = "_#{k}"
-            next unless self.respond_to?(m)
+            next unless self.respond_to?(m, true)
 
             r = self.send(m, field, value, matches, k, v)
 
