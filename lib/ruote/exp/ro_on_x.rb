@@ -40,6 +40,7 @@ module Ruote::Exp
         'fei' => h.fei,
         'at' => err.respond_to?(:at) ? err.at : Ruote.now_to_utc_s,
         'class' => err.class.to_s,
+        'summary' => err.inspect,
         'message' => err.message,
         'trace' => err.backtrace,
         'details' => err.respond_to?(:ruote_details) ? err.ruote_details : nil,
