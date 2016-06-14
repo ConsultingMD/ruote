@@ -124,14 +124,22 @@ module Ruote
 
       herr = deflate(err, fei, fexp)
 
+      summary = herr.delete('summary')
+      legacy = herr.dup
+
+      legacy['message'] = summary if summary
+      legacy['trace'] = (legacy['trace'] || err.backtrace || []).join("\n")
+
       # fill error in the error journal
 
-      @context.storage.put(
-        herr.merge(
-          'type' => 'errors',
-          '_id' => "err_#{Ruote.to_storage_id(fei)}",
+      @context.storage.put({
           'message' => err.inspect,                     # :-(
           'trace' => (err.backtrace || []).join("\n"),  # :-(
+        }.
+        merge(legacy).
+        merge(
+          'type' => 'errors',
+          '_id' => "err_#{Ruote.to_storage_id(fei)}",
           'msg' => msg)
       ) if fei
 

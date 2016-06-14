@@ -304,7 +304,7 @@ class FtOnErrorTest < Test::Unit::TestCase
     assert_equal true, wi.fields['seen']
 
     assert_equal(
-      %w[ at class details deviations fei message trace tree ],
+      %w[ at class details deviations fei message summary trace tree ],
       wi.error.keys.sort)
   end
 
@@ -504,7 +504,7 @@ class FtOnErrorTest < Test::Unit::TestCase
       'terminated',
       r['action'])
     assert_equal(
-      %w[ at class details deviations fei message trace tree ],
+      %w[ at class details deviations fei message summary trace tree ],
       r['variables']['a'].keys.sort)
     assert_equal(
       [ 'error', { 'nada' => nil }, [] ],

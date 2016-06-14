@@ -78,7 +78,7 @@ class FtAddServiceTest < Test::Unit::TestCase
 
   # Fighting https://github.com/jmettraux/ruote/issues/28
   #
-  def test_add_history
+  def test_add_history_again
 
     assert_equal Ruote::DefaultHistory, @dashboard.history.class
 
@@ -94,6 +94,10 @@ class FtAddServiceTest < Test::Unit::TestCase
 
   # Fighting https://github.com/jmettraux/ruote/issues/28
   #
+  # HEISENSPEC: Fails for me sometimes -- Rick. See the issue link.
+  # Generally a bad idea to screw around with configuration after
+  # startup unless absolutely necessary. Mettraux & I agree it's not
+  # important.
   def test_add_history_and_log
 
     #@dashboard.noisy = true
