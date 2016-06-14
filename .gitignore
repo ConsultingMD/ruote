@@ -14,3 +14,4 @@ quickstart/ruote_work
 examples/barley/.sass-cache
 examples/barley/ruote_data
 
+.byebug*

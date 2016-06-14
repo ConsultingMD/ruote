@@ -386,6 +386,47 @@ class FtErrorsTest < Test::Unit::TestCase
 
   # fighting https://github.com/jmettraux/ruote/issues/90
   #
+  # The original NameError/TypeError problem can't happen in Ruby 2.0
+  class ExceptionWithinHandle < RuntimeError
+    def is_a?(_whatever)
+      raise FtErrorsTest::MyError
+    end
+  end
+
+  def test_error_in_error_handler
+
+    stderr = $stderr
+
+    result = String.new
+    err = StringIO.new(result, 'w+')
+
+    $stderr = err
+
+    @dashboard.register :alpha do |wi|
+      raise FtErrorsTest::ExceptionWithinHandle
+    end
+
+    wfid = @dashboard.launch(Ruote.define { alpha })
+
+    sleep 1.0
+
+    assert_match /Please report issue/, result
+    assert_match /MyError/, result
+
+    $stderr = stderr
+  end
+
+  # fighting https://github.com/jmettraux/ruote/issues/90
+  #
+  # The original NameError/TypeError problem can't happen in Ruby 2.0. OTOH: we
+  # really would like to know the error in the exception handler happens. New
+  # behavior is to ensure that the nested error appears as the logged error.
+  class ExceptionWhichRaises < RuntimeError
+    def at
+      raise FtErrorsTest::MyError,"ExceptionalError"
+    end
+  end
+
   def test_error_in_error
 
     stderr = $stderr
@@ -396,16 +437,16 @@ class FtErrorsTest < Test::Unit::TestCase
     $stderr = err
 
     @dashboard.register :alpha do |wi|
-      raise NameError, String
+      raise FtErrorsTest::ExceptionWhichRaises,"MainError"
     end
 
     wfid = @dashboard.launch(Ruote.define { alpha })
 
     sleep 1.0
 
-    assert_match /Please report issue/, result
-    assert_match /TypeError/, result
-    assert_match /can't convert Class into String/, result
+    assert_equal "",result
+    assert_equal 1, @dashboard.process(wfid).errors.count
+    assert_match /ExceptionalError/, @dashboard.process(wfid).errors.first.message
 
     $stderr = stderr
   end

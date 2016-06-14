@@ -63,7 +63,7 @@ class EftSetTest < Test::Unit::TestCase
     assert_trace %w[ a b0 c0 d1 e0 ], pdef
   end
 
-  def test_unset_var
+  def test_unset_var_by_trace
 
     pdef = Ruote.process_definition do
       sequence do

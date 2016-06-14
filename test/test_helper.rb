@@ -4,12 +4,14 @@
 #
 # since Mon Oct  9 22:19:44 JST 2006
 #
+require 'bundler'
 
 require File.join(File.dirname(__FILE__), 'path_helper')
 
 require 'pp'
 require 'test/unit'
-require 'rubygems' unless defined?(Bundler)
+
+Bundler.require(:default,:development)
 
 # Fail fast, especially when testing
 #
