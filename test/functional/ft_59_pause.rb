@@ -200,6 +200,7 @@ class FtPauseTest < Test::Unit::TestCase
 
     @dashboard.wait_for(1)
 
+    # HEISEN (one fail in a dozen or so single-workstation tests)
     assert_equal(
       [ "dispatched:#{wfid}", "pause:#{wfid}" ],
       @tracer.to_a)
