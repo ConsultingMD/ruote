@@ -1363,8 +1363,6 @@ module Ruote
 
       @dashboard = dashboard
 
-      @dashboard.context.plist.clear if clear
-
       @list = clear ? [] : nil
     end
 
