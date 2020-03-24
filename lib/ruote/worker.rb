@@ -237,6 +237,7 @@ module Ruote
       Thread.current['ruote_worker'] = self
 
       @storage.begin_step if @storage.respond_to?(:begin_step)
+      @storage.sequel.transaction
     end
 
     # One worker step, fetches schedules and triggers those whose time has
